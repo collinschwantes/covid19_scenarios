@@ -1,5 +1,4 @@
 import { ContainmentData, DateRange } from '../../../algorithms/Param.types'
-import { makeTimeSeries } from '../../../algorithms/TimeSeries'
 import simulationData from './simulation'
 
 export interface ContainmentScenario {
@@ -7,7 +6,7 @@ export interface ContainmentScenario {
   data: ContainmentData
 }
 
-const reductions = [
+const containmentScenarios = [
   {
     name: 'No mitigation',
     reduction: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
@@ -26,8 +25,8 @@ const reductions = [
   },
 ]
 
-const containmentScenarios: ContainmentScenario[] = reductions.map(d => {
-  return {name: d.name, data: {reduction: makeTimeSeries(simulationData.simulationTimeRange, d.reduction)}}
-})
+// const containmentScenarios: ContainmentScenario[] = reductions.map(d => {
+//   return {name: d.name, data: {reduction: makeTimeSeries(simulationData.simulationTimeRange, d.reduction)}}
+// })
 
 export default containmentScenarios

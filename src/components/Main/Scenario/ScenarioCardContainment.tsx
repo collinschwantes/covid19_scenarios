@@ -21,6 +21,7 @@ export interface ScenarioCardContainmentProps {
 
 function ScenarioCardContainment({ scenarioState, errors, touched, scenarioDispatch }: ScenarioCardContainmentProps) {
   function handleChangeContainmentScenario(newContainmentScenario: string) {
+    console.log("CHANGE CONTAINMENT", scenarioState.simulation.data.simulationTimeRange)
     scenarioDispatch(setContainmentScenario({ scenarioName: newContainmentScenario }))
   }
 

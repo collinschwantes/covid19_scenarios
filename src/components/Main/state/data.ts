@@ -4,6 +4,8 @@ import overallScenarios, { OverallScenario } from '../../../assets/data/scenario
 import populationScenarios from '../../../assets/data/scenarios/populations'
 import simulationData from '../../../assets/data/scenarios/simulation'
 
+import { makeTimeSeries } from '../../../algorithms/TimeSeries'
+
 import { EpidemiologicalData, PopulationData, SimulationData } from '../../../algorithms/Param.types'
 
 export const overallScenarioNames = overallScenarios.map(s => s.name)
@@ -35,12 +37,12 @@ export function getEpidemiologicalData(scenario: string): EpidemiologicalData {
   return epidemiologicalData
 }
 
-export function getContainmentScenarioData(scenario: string) {
-  const containmentScenarioReduction = containmentScenarios.find(s => s.name === scenario)?.data
+export function getContainmentScenarioData(scenario: string, timeRange: Record<string, Date>) {
+  const containmentScenarioReduction = containmentScenarios.find(s => s.name === scenario)?.reduction
   if (!containmentScenarioReduction) {
     throw new Error(`Error: containment scenario "${scenario}" not found`)
   }
-  return containmentScenarioReduction
+  return {reduction: makeTimeSeries(timeRange, containmentScenarioReduction)}
 }
 
 export function getSimulationData(): SimulationData {

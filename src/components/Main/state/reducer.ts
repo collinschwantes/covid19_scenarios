@@ -57,7 +57,7 @@ export const scenarioReducer = reducerWithInitialState(defaultScenarioState)
         draft.epidemiological.data = getEpidemiologicalData(epidemiologicalScenario)
 
         draft.containment.current = containmentScenario
-        draft.containment.data = getContainmentScenarioData(containmentScenario)
+        draft.containment.data = getContainmentScenarioData(containmentScenario, draft.simulation.data.simulationTimeRange)
       }
     }),
   )
@@ -90,7 +90,7 @@ export const scenarioReducer = reducerWithInitialState(defaultScenarioState)
       draft.overall.current = CUSTOM_SCENARIO_NAME
       draft.containment.current = scenarioName
       if (scenarioName !== CUSTOM_SCENARIO_NAME) {
-        draft.containment.data = getContainmentScenarioData(scenarioName)
+        draft.containment.data = getContainmentScenarioData(scenarioName, draft.simulation.data.simulationTimeRange)
       }
     }),
   )
@@ -128,6 +128,7 @@ export const scenarioReducer = reducerWithInitialState(defaultScenarioState)
   .withHandling(
     immerCase(setSimulationData, (draft, { data }) => {
       draft.simulation.data = data
+      console.log("CHANGING TIME V2", data);
       draft.containment.data.reduction = updateTimeSeries(data.simulationTimeRange, draft.containment.data.reduction)
     }),
   )

@@ -61,7 +61,7 @@ export const defaultScenarioState: State = {
   containment: {
     scenarios: containmentScenarioNames,
     current: defaultScenario.containmentScenario,
-    data: getContainmentScenarioData(defaultScenario.containmentScenario),
+    data: getContainmentScenarioData(defaultScenario.containmentScenario, getSimulationData().simulationTimeRange),
   },
   simulation: {
     data: getSimulationData(),
